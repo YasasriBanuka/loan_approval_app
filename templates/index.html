@@ -4,179 +4,177 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loan Approval Prediction</title>
-    <!-- Google Font: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- Feather Icons for subtle iconography -->
     <script src="https://unpkg.com/feather-icons"></script>
-     <style>
-    :root {
-      --border-radius: 16px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Roboto', 'Open Sans', Arial, sans-serif;
-      background-color: rgb(190, 188, 188);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 40px 20px;
-    }
-
-    .container {
-      background-color:whitesmoke;
-      border: 1px solid #ccc;
-      padding: 40px;
-      border-radius: var(--border-radius);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      max-width: 800px;
-      width: 100%;
-      text-align: center;
-    }
-
-    .header {
-      margin-bottom: 30px;
-    }
-
-    .header h1 {
-      font-weight: 700;
-      font-size: 2.2rem;
-      margin-bottom: 8px;
-      color: black;
-    }
-
-    .header p {
-      color: black;
-      font-size: 1rem;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .form-group {
-      text-align: left;
-      position: relative;
-    }
-
-    .form-group.full-width {
-      grid-column: 1 / -1;
-    }
-
-    .form-group label {
-      margin-bottom: 8px;
-      font-weight: 500;
-      color: black;
-      font-size: 14px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .form-group label i {
-      color: black;
-    }
-
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 12px 15px;
-      border: 1px solid #999;
-      background-color: white;
-      border-radius: 10px;
-      font-size: 16px;
-      font-family: 'Roboto', 'Open Sans', Arial, sans-serif;
-      color:gray;
-    }
-
-    .form-group input::placeholder {
-      color: #666;
-    }
-
-    .form-group select option {
-      background: white;
-      color: black;
-    }
-
-    #predictBtn {
-      background-color: green;
-      color: white;
-      border: none;
-      padding: 15px;
-      font-size: 18px;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      width: 100%;
-      grid-column: 1 / -1;
-      margin-top: 20px;
-    }
-
-    #predictBtn:hover:not(:disabled) {
-      transform: translateY(-3px);
-      box-shadow: 0 7px 25px rgba(0, 128, 0, 0.3);
-    }
-
-    @media (max-width: 768px) {
-      .form-grid {
-        grid-template-columns: 1fr;
+    <style>
+      :root {
+        --border-radius: 16px;
       }
-    }
-  </style>
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: rgb(190, 188, 188);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 40px 20px;
+      }
+
+      .container {
+        background-color: whitesmoke;
+        border: 1px solid #ccc;
+        padding: 40px;
+        border-radius: var(--border-radius);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        max-width: 1000px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .header {
+        margin-bottom: 30px;
+      }
+
+      .header h1 {
+        font-weight: 700;
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+        color: black;
+      }
+
+      .header p {
+        color: black;
+        font-size: 1rem;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .form-group {
+        text-align: left;
+        position: relative;
+      }
+
+      .form-group.full-width {
+        grid-column: 1 / -1;
+      }
+
+      .form-group label {
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: black;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #999;
+        background-color: white;
+        border-radius: 10px;
+        font-size: 16px;
+        color: gray;
+      }
+
+      .form-group select option {
+        color: black;
+      }
+
+      #predictBtn {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 15px;
+        font-size: 18px;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        width: 100%;
+        grid-column: 1 / -1;
+        margin-top: 20px;
+      }
+
+      #predictBtn:hover:not(:disabled) {
+        transform: translateY(-3px);
+        box-shadow: 0 7px 25px rgba(0, 128, 0, 0.3);
+      }
+
+      #result {
+        margin-top: 20px;
+        padding: 12px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 8px;
+        display: none;
+      }
+
+      .success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      @media (max-width: 992px) {
+        .form-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
   </head>
+
   <body>
     <div class="container">
       <div class="header">
         <h1>LOAN PREDICTION</h1>
-        <p>Let's predict your loan approval status.</p>
       </div>
 
       <form id="predictionForm">
         <div class="form-grid">
           <div class="form-group">
             <label for="person_age"><i data-feather="user"></i> Person Age</label>
-            <input
-              id="person_age"
-              type="number"
-              name="person_age"
-              placeholder="Enter your age"
-              required
-            />
+            <input type="number" id="person_age" name="person_age" placeholder="Enter your age" required />
           </div>
 
           <div class="form-group">
-            <label for="person_income"
-              ><i data-feather="dollar-sign"></i> Person Annual Income</label
-            >
-            <input
-              id="person_income"
-              type="number"
-              name="person_income"
-              placeholder="Enter your annual income"
-              required
-            />
+            <label for="person_income"><i data-feather="dollar-sign"></i> Annual Income</label>
+            <input type="number" id="person_income" name="person_income" placeholder="Enter your income" required />
           </div>
 
           <div class="form-group">
-            <label for="person_home_ownership"
-              ><i data-feather="home"></i>Home Ownership</label
-            >
+            <label for="person_home_ownership"><i data-feather="home"></i> Home Ownership</label>
             <select id="person_home_ownership" name="person_home_ownership">
               <option value="RENT">Rent</option>
               <option value="MORTGAGE">Mortgage</option>
@@ -186,36 +184,23 @@
           </div>
 
           <div class="form-group">
-            <label for="person_emp_length"
-              ><i data-feather="briefcase"></i>Year of Employment</label
-            >
-            <input
-              id="person_emp_length"
-              type="number"
-              name="person_emp_length"
-              placeholder="Enter Correct work period "
-              required
-            />
+            <label for="person_emp_length"><i data-feather="briefcase"></i> Employment Years</label>
+            <input type="number" id="person_emp_length" name="person_emp_length" placeholder="Years employed" required />
           </div>
 
           <div class="form-group">
-            <label for="loan_intent"
-              ><i data-feather="target"></i>Loan Type</label
-            >
+            <label for="loan_intent"><i data-feather="target"></i> Loan Type</label>
             <select id="loan_intent" name="loan_intent">
               <option value="EDUCATION">Education</option>
               <option value="MEDICAL">Medical</option>
               <option value="PERSONAL">Personal</option>
               <option value="VENTURE">Venture</option>
-              <option value="HOMEIMPROVEMENT">Home Improvement</option>
               <option value="DEBTCONSOLIDATION">Debt Consolidation</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="loan_grade"
-              ><i data-feather="award"></i>Loan Grade</label
-            >
+            <label for="loan_grade"><i data-feather="award"></i> Loan Grade</label>
             <select id="loan_grade" name="loan_grade">
               <option value="A">A</option>
               <option value="B">B</option>
@@ -227,75 +212,35 @@
           </div>
 
           <div class="form-group">
-            <label for="loan_amnt"
-              ><i data-feather="credit-card"></i>Loan Amount ($)</label
-            >
-            <input
-              id="loan_amnt"
-              type="number"
-              name="loan_amnt"
-              placeholder="Enter Correct Loan amount"
-              required
-            />
+            <label for="loan_amnt"><i data-feather="credit-card"></i> Loan Amount ($)</label>
+            <input type="number" id="loan_amnt" name="loan_amnt" placeholder="Loan amount" required />
           </div>
 
           <div class="form-group">
-            <label for="loan_int_rate"
-              ><i data-feather="percent"></i>Interest Rate</label
-            >
-            <input
-              id="loan_int_rate"
-              type="number"
-              step="0.01"
-              name="loan_int_rate"
-              placeholder="Enter Correct Interest Rate"
-              required
-            />
+            <label for="loan_int_rate"><i data-feather="percent"></i> Interest Rate</label>
+            <input type="number" step="0.01" id="loan_int_rate" name="loan_int_rate" placeholder="Rate %" required />
           </div>
 
           <div class="form-group">
-            <label for="loan_percent_income"
-              ><i data-feather="pie-chart"></i>Loan to Income Ratio</label
-            >
-            <input
-              id="loan_percent_income"
-              type="number"
-              step="0.01"
-              name="loan_percent_income"
-              placeholder="Ex: 0.20"
-              required
-            />
+            <label for="loan_percent_income"><i data-feather="pie-chart"></i> Loan to Income Ratio</label>
+            <input type="number" step="0.01" id="loan_percent_income" name="loan_percent_income" placeholder="Ex: 0.20" required />
           </div>
 
           <div class="form-group">
-            <label for="cb_person_cred_hist_length"
-              ><i data-feather="clock"></i>Credit History (Years)</label
-            >
-            <input
-              id="cb_person_cred_hist_length"
-              type="number"
-              name="cb_person_cred_hist_length"
-              placeholder="Select yours credit history"
-              required
-            />
+            <label for="cb_person_cred_hist_length"><i data-feather="clock"></i> Credit History (Years)</label>
+            <input type="number" id="cb_person_cred_hist_length" name="cb_person_cred_hist_length" placeholder="Years of credit history" required />
           </div>
 
-          <div class="form-group full-width">
-            <label for="cb_person_default_on_file"
-              ><i data-feather="alert-triangle"></i>Has Prior Default</label
-            >
-            <select
-              id="cb_person_default_on_file"
-              name="cb_person_default_on_file"
-            >
+          <div class="form-group">
+            <label for="cb_person_default_on_file"><i data-feather="alert-triangle"></i> Has Prior Default</label>
+            <select id="cb_person_default_on_file" name="cb_person_default_on_file">
               <option value="N">No</option>
               <option value="Y">Yes</option>
             </select>
           </div>
 
-          <button type="submit" id="predictBtn" class="full-width">
+          <button type="submit" id="predictBtn">
             <span class="btn-text">Predict Approval</span>
-            <div class="spinner"></div>
           </button>
         </div>
       </form>
@@ -304,56 +249,48 @@
     </div>
 
     <script>
-      // Render Feather Icons
       feather.replace();
 
-      document
-        .getElementById("predictionForm")
-        .addEventListener("submit", async function (event) {
-          event.preventDefault();
+      document.getElementById("predictionForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-          const predictBtn = document.getElementById("predictBtn");
-          const resultDiv = document.getElementById("result");
-          const formData = new FormData(this);
+        const predictBtn = document.getElementById("predictBtn");
+        const resultDiv = document.getElementById("result");
+        const formData = new FormData(this);
 
-          predictBtn.disabled = true;
-          predictBtn.classList.add("loading");
-          resultDiv.style.display = "none";
-          resultDiv.className = "";
+        predictBtn.disabled = true;
+        resultDiv.style.display = "none";
+        resultDiv.className = "";
 
-          try {
-            // Mock API call for demonstration purposes
-            await new Promise((resolve) => setTimeout(resolve, 1500));
+        try {
+          await new Promise((resolve) => setTimeout(resolve, 1500));
 
-            const loanAmnt = parseFloat(formData.get("loan_amnt"));
-            const income = parseFloat(formData.get("person_income"));
-            let data;
+          const loanAmnt = parseFloat(formData.get("loan_amnt"));
+          const income = parseFloat(formData.get("person_income"));
+          let data;
 
-            if (isNaN(loanAmnt) || isNaN(income) || loanAmnt > income * 0.5) {
-              data = { prediction: "Loan Not Approved ❌" };
+          if (isNaN(loanAmnt) || isNaN(income) || loanAmnt > income * 0.5) {
+            data = { prediction: "Loan Not Approved ❌" };
+          } else {
+            data = { prediction: "Loan Approved ✅" };
+          }
+
+          if (data.prediction) {
+            resultDiv.innerText = data.prediction;
+            if (data.prediction === "Loan Approved ✅") {
+              resultDiv.classList.add("success");
             } else {
-              data = { prediction: "Loan Approved ✅" };
-            }
-
-            if (data.prediction) {
-              resultDiv.innerText = data.prediction;
-              resultDiv.classList.add(
-                data.prediction.includes("Approved") ? "success" : "error"
-              );
-            } else if (data.error) {
-              resultDiv.innerText = "Error: " + data.error;
               resultDiv.classList.add("error");
             }
-          } catch (error) {
-            resultDiv.innerText =
-              "An unexpected network error occurred. Please try again.";
-            resultDiv.classList.add("error");
-          } finally {
-            predictBtn.disabled = false;
-            predictBtn.classList.remove("loading");
-            resultDiv.style.display = "block";
           }
-        });
+        } catch (error) {
+          resultDiv.innerText = "An unexpected network error occurred. Please try again.";
+          resultDiv.classList.add("error");
+        } finally {
+          predictBtn.disabled = false;
+          resultDiv.style.display = "block";
+        }
+      });
     </script>
   </body>
 </html>

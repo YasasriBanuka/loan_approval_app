@@ -39,7 +39,8 @@ def predict():
         input_df = pd.DataFrame([input_data])
 
         # Encode categorical values
-        categorical_cols = ["person_home_ownership", "loan_intent", "loan_grade", "cb_person_default_on_file"]
+        categorical_cols = ["person_home_ownership", "loan_intent", "loan_grade",
+                             "cb_person_default_on_file"]
         for col in categorical_cols:
             if col in label_encoders:
                 # Handle unseen values
