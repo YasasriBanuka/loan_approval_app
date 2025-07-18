@@ -53,17 +53,5 @@ Dataset: `loan_data.csv`
 | cb_person_cred_hist_length | Credit history length                  |
 | loan_status            | Target variable (0 = Rejected, 1 = Approved) |
 
----
 
-## 📈 System Architecture
 
-```mermaid
-flowchart TD
-    A[Raw Data] --> B[Data Preprocessing]
-    B --> C[Exploratory Data Analysis]
-    C --> D[Train/Test Split]
-    D --> E[Model Training (Multiple Models)]
-    E --> F[Hyperparameter Tuning]
-    F --> G[Model Evaluation]
-    G --> H[Best Model Selection]
-    H --> I[Prediction Output]
