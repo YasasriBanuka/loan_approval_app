@@ -52,7 +52,7 @@ def predict():
 
         # Make prediction
         prediction = model.predict(input_df)[0]
-        result = "Loan Approved ✅" if prediction == 0 else "Loan Not Approved ❌"
+        result = "Loan Approved " if prediction == 0 else "Loan Not Approved  "
 
         return jsonify({"prediction": result})
 
